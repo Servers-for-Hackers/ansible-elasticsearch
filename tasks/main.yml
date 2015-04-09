@@ -20,11 +20,13 @@
 # Run sudo update-rc.d elasticsearch defaults 95 10
 - name: Enable Elasticsearch (Start on boot)
   service: name=elasticsearch enabled=yes
+  notify:
+   - Start Elasticsearch
 
 - name: Configure Elasticsearch
   template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
   tags:
-    - configes
+    - configs
   notify:
    - Restart Elasticsearch
 
